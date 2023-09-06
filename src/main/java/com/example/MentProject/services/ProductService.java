@@ -1,10 +1,9 @@
 package com.example.MentProject.services;
 
-import com.example.MentProject.models.Product;
+import com.example.MentProject.entity.Product;
 import com.example.MentProject.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,8 +15,8 @@ public class ProductService {
           this.productRepository = productRepository;
      }
 
-
      public List<Product> getProduct (String name) {
+          //TODO split into two methods
           if (name != null) {
                return productRepository.findByTitle(name);
           }

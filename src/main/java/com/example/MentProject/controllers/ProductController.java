@@ -1,56 +1,39 @@
 package com.example.MentProject.controllers;
 
-import com.example.MentProject.models.Product;
+import com.example.MentProject.entity.Product;
+import com.example.MentProject.model.ProductDTO;
 import com.example.MentProject.services.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
-@RestController
+@RestController("/product")
 public class ProductController {
 
     private ProductService productService;
 
-
-    @Autowired
-    public ProductController(ProductService productService){
-         this.productService = productService;
-    }
-
     @GetMapping("/")
-    public List<Product> getProduct(@RequestParam String name){
-       return productService.getProduct(name);
+    public List<Product> getAllProducts(){
+       return productService.getAllProducts();
     }
 
-    @GetMapping("/product/edit")
-    public String productUpdate(@PathVariable("product") Product product, Model model){
-        model.addAttribute("product", product);
-        return "edit";
+    @GetMapping("/{id}")
+    public ProductDTO getProduct(@PathVariable("id") Long productId){
+        return productService.getProductById(productId);
     }
 
-    @PostMapping("/product/create")
-    public String createProduct(Product product) throws IOException {
+    @PostMapping("/")
+    public void createProduct(Product product) {
         productService.saveProduct(product);
-        return "redirect:/";
     }
 
-    @PostMapping("/product/{id}")
-    public String productUpdate(@PathVariable Long id, @RequestBody Product product){
-        product.setId(id);
+    @PutMapping("/")
+    public void productUpdate( @RequestBody Product product){
         productService.updateProduct(product);
-        return "redirect:/product/{id}" ;
-
     }
 
-    @PostMapping("/product/delete/{id}")
-    public String deleteProduct(@PathVariable Long id){
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable Long id){
         productService.deleteProduct(id);
-        return "redirect:/";
     }
-
 }
