@@ -1,35 +1,53 @@
 package com.example.MentProject.models;
 
-public class ProductDTO {
+import com.example.MentProject.entity.Product;
 
-        private Long id;
-        private String name;
-        private String description;
-        private int price;
+public class ProductDTO extends Product {
 
-        public ProductDTO() {
-        }
+    private Long id;
+    private String name;
+    private String description;
+    private int price;
 
-        public ProductDTO(Long id, String name, String description, int price) {
-            this.id = id;
-            this.name = name;
-            this.description = description;
-            this.price = price;
-        }
+    public ProductDTO() {
+    }
 
-    public Long getId() {return id;}
+    public ProductDTO(Long id, String name, String description, int price) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
 
-    public void setId(Long id) {this.id = id;}
+    public Long getId() {
+        return id;
+    }
 
-    public String getName() {return name;}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public void setName(String name) {this.name = name;}
+    public String getName() {
+        return name;
+    }
 
-    public String getDescription() {return description;}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public void setDescription(String description) {this.description = description;}
+    public String getDescription() {
+        return description;
+    }
 
-    public int getPrice() {return price;}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public void setPrice(int price) {this.price = price;}
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 }

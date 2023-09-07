@@ -7,39 +7,35 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController("/product")
 public class ProductController {
 
     private ProductService productService;
 
-
-    public ProductController(ProductService productService){
-         this.productService = productService;
-    }
-
     @GetMapping("/")
-    public List<Product> getAllProducts(){
-       return productService.getAllProducts();
+    public List<Product> getAllProducts() {
+        return productService.getAllProducts();
     }
 
-    /*@GetMapping("/{id}")
-    public ProductDTO getProductById(@PathVariable("id") Long productId){
+    @GetMapping("/{id}")
+    public Optional<Product> getProductById(@PathVariable("id") Long productId) {
         return productService.getProductById(productId);
-    }*/
+    }
 
     @PostMapping("/")
-    public void createProduct(Product product) throws IOException {
+    public void createProduct(ProductDTO product) throws IOException {
         productService.saveProduct(product);
     }
 
     @PutMapping("/product/{id}")
-    public void productUpdate(@RequestBody Product product){
+    public void productUpdate(@RequestBody ProductDTO product) {
         productService.updateProduct(product);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProduct(@PathVariable Long id){
+    public void deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
     }
 
