@@ -1,10 +1,9 @@
 package com.example.MentProject.services;
 
-import com.example.MentProject.models.Product;
+import com.example.MentProject.entity.Product;
 import com.example.MentProject.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,14 +15,9 @@ public class ProductService {
           this.productRepository = productRepository;
      }
 
-
-     public List<Product> getProduct (String name) {
-          if (name != null) {
-               return productRepository.findByTitle(name);
-          }
+     public List<Product> getAllProducts () {
           return productRepository.findAll();
      }
-
 
      public void deleteProduct(Long id) {
           productRepository.deleteById(id);
@@ -36,4 +30,8 @@ public class ProductService {
      public Product updateProduct(Product product){
           return productRepository.save(product);
      }
+
+     /*public Product getProductById(Long id) {
+          return productRepository.findById(id);
+     }*/
 }

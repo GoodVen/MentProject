@@ -1,4 +1,4 @@
-package com.example.MentProject.models;
+package com.example.MentProject.entity;
 
 import javax.persistence.*;
 
