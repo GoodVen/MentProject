@@ -17,6 +17,9 @@ public class Product {
     @Column
     private int price;
 
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    private Basket basket;
+
     public Product() {
     }
 
