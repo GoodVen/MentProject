@@ -8,9 +8,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 // Lets writte a simple unit test for ProductService class. I will provide a simple test for the method saveProduct.
 // We will use Mockito framework to mock the ProductRepository class.
@@ -68,4 +72,66 @@ class ProductServiceTest {
         // All logic for this method for tested.
         // Except cases when DB throws an exception. But you may write another test for this case.
     }
+    @Test
+    void whenUpdateProductWithNonEmptyValue(){
+        Product product1 = new Product();
+        product1.setId(1L);
+        product1.setName("TestProduct");
+        product1.setPrice(70);
+
+        when(productRepository.save(product1)).thenReturn(product1);
+
+        productService.updateProduct(product1);
+
+        assertEquals(70, product1.getPrice(),"Price is correct");
+        verify(productRepository).save(product1);
+    }
+    @Test
+    void whenDeleteByIdProduct(){
+        Long productIdToDelete = 1L;
+
+       doNothing().when(productRepository).deleteById(productIdToDelete);
+
+        productService.deleteProduct(productIdToDelete);
+
+        verify(productRepository, times(1)).deleteById(productIdToDelete);
+    }
+    @Test
+    void whenGetAllProducts(){
+        List<Product> products = Arrays.asList(
+                new Product(1L, "product1","some desc", 50),
+                new Product(2L, "product2","some desc", 70),
+                new Product(3L, "product3","some desc", 45)
+        );
+
+        when(productRepository.findAll()).thenReturn(products);
+
+        List<Product> result = productService.getAllProducts();
+
+        assertEquals(products, result);
+
+    }
+    @Test
+    void whenGetProductById(){
+        Long productId = 1L;
+        Product testProduct = new Product(1L,"test", "test", 10 );
+
+        when(productRepository.findById(productId)).thenReturn(Optional.of(testProduct));
+
+        Optional<Product> testResult = productService.getProductById(productId);
+
+        assertTrue(testResult.isPresent());
+        assertEquals(testProduct, testResult.get());
+    }
+    @Test
+    void whenGetProductByIdNotFound(){
+        Long productId = 999L;
+        when(productRepository.findById(productId)).thenReturn(Optional.empty());
+
+        Optional<Product> testResult = productService.getProductById(productId);
+
+        assertFalse(testResult.isPresent());
+
+    }
+
 }
