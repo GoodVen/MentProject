@@ -2,7 +2,7 @@ package com.example.MentProject.models;
 
 import com.example.MentProject.entity.Product;
 
-public class ProductDTO extends Product {
+public class ProductDTO {
 
     private Long id;
     private String name;

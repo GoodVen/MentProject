@@ -20,8 +20,8 @@ public class DataInitializer implements ApplicationRunner {
         ProductDTO product1 = new ProductDTO(1L, "Pasta", "some pasta", 100);
         ProductDTO product2 = new ProductDTO(2L, "Pasta1", "some pasta", 200);
         ProductDTO product3 = new ProductDTO(3L, "Pasta2", "some pasta", 300);
-        productRepository.save(product1);
+       /* productRepository.save(product1);
         productRepository.save(product2);
-        productRepository.save(product3);
+        productRepository.save(product3);*/
     }
 }
