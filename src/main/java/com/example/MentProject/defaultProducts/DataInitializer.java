@@ -1,5 +1,6 @@
 package com.example.MentProject.defaultProducts;
 
+import com.example.MentProject.entity.ProductConverter;
 import com.example.MentProject.models.ProductDTO;
 import com.example.MentProject.repositories.ProductRepository;
 import org.springframework.boot.ApplicationArguments;
@@ -20,8 +21,8 @@ public class DataInitializer implements ApplicationRunner {
         ProductDTO product1 = new ProductDTO(1L, "Pasta", "some pasta", 100);
         ProductDTO product2 = new ProductDTO(2L, "Pasta1", "some pasta", 200);
         ProductDTO product3 = new ProductDTO(3L, "Pasta2", "some pasta", 300);
-       /* productRepository.save(product1);
-        productRepository.save(product2);
-        productRepository.save(product3);*/
+        productRepository.save(ProductConverter.convertToEntity(product1));
+        productRepository.save(ProductConverter.convertToEntity(product2));
+        productRepository.save(ProductConverter.convertToEntity(product3));
     }
 }
