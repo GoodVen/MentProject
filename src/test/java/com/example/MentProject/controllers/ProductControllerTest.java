@@ -1,8 +1,7 @@
 package com.example.MentProject.controllers;
 
 
-import com.example.MentProject.entity.Product;
-import com.example.MentProject.entity.ProductConverter;
+
 import com.example.MentProject.models.ProductDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
